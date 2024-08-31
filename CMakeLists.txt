@@ -4,10 +4,10 @@ pkg_check_modules(MINIZIP minizip-ng)
 pkg_check_modules(ZLIB zlib)
 
 set(COLLADA_DOM_INCLUDE_INSTALL_DIR
-	${CMAKE_SOURCE_DIR}/../packages/include/collada-dom
+	${CMAKE_BINARY_DIR}/packages/include/collada-dom
 )
 set(COLLADA_DOM_LIBS_INSTALL_DIR
-	${CMAKE_SOURCE_DIR}/../packages/lib
+	${CMAKE_BINARY_DIR}/packages/lib
 )
 file(MAKE_DIRECTORY ${COLLADA_DOM_INCLUDE_INSTALL_DIR}
 	COLLADA_DOM_LIBS_INSTALL_DIR)
