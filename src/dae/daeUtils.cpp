@@ -118,7 +118,7 @@ list<string> cdom::makeStringList(const char* s, ...) {
 	va_end(args);
 	return result;
 }
-#endif 0
+#endif // 0
 
 string cdom::getCurrentDir() {
 #ifdef __CELLOS_LV2__
@@ -154,7 +154,7 @@ char cdom::getFileSeparator() {
 const string& cdom::getSystemTmpDir() {
 #ifdef WIN32
     static string tmpDir = string(getenv("TMP")) + getFileSeparator();
-#elif defined(__linux__) || defined(__linux)
+#elif defined(__linux__) || defined(__linux) || defined(__FreeBSD__)
     static string tmpDir = "/tmp/";
 #elif defined __APPLE_CC__
 static string tmpDir = string(getenv("TMPDIR"));
@@ -173,7 +173,7 @@ string cdom::getRandomFileName() {
     std::string tmp(tmpnam(&tmpbuffer[0]));
 #ifdef WIN32
     randomSegment = tmp.substr(tmp.find_last_of('\\')+1);
-#elif defined(__linux__) || defined(__linux)
+#elif defined(__linux__) || defined(__linux) || defined(__FreeBSD__)
     randomSegment = tmp.substr(tmp.find_last_of('/')+1);
 #elif defined __APPLE_CC__
 	randomSegment = tmp.substr(tmp.find_last_of('/')+1);
