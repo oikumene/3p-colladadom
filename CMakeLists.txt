@@ -1,13 +1,15 @@
 project(colladadom)
 cmake_minimum_required(VERSION 3.17)
+cmake_policy(SET CMP0167 NEW)
 
 include(FindPkgConfig)
 
+find_package(Boost REQUIRED CONFIG)
 pkg_check_modules(LIBXML2 libxml-2.0)
-pkg_check_modules(MINIZIP minizip-ng)
+pkg_check_modules(MINIZIP minizip)
 pkg_check_modules(ZLIB zlib)
 
-set(COLLADA_DOM_SOVERSION "2")
+set(COLLADA_DOM_SOVERSION "0")
 set(COLLADA_DOM_VERSION "2.3")
 set(COLLADA_DOM_INCLUDE_INSTALL_DIR
 	${CMAKE_BINARY_DIR}/packages/include/collada
@@ -27,7 +29,7 @@ file(GLOB stddatabase_files ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/STLDatabase/
 file(GLOB stderrplugin_files ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/stdErrPlugin/*.cpp)
 
 set(COLLADA_BASE_SOURCES ${dae_files} ${libxmlplugin_files} ${stddatabase_files} ${stderrplugin_files})
-set(COLLADA_LIBS ${LIBXML2_LIBRARIES} ${MINIZIP_LIBRARIES} ${ZLIB_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+set(COLLADA_LIBS ${LIBXML2_LIBRARIES} ${MINIZIP_LIBRARIES} ${ZLIB_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY})
 list(JOIN MINIZIP_CFLAGS " " VAR_MINIZIP_CFLAGS)
 set(COLLADA_COMPILE_FLAGS "${EXTRA_COMPILE_FLAGS} ${VAR_MINIZIP_CFLAGS} ${Boost_CFLAGS} -DDOM_INCLUDE_LIBXML")
 

@@ -1,13 +1,18 @@
 file(GLOB dom_files ${CMAKE_CURRENT_SOURCE_DIR}/dom/*.cpp)
 add_library(collada14dom STATIC ${COLLADA_BASE_SOURCES} ${dom_files})
+target_compile_options(collada14dom PRIVATE
+	"-Wno-error=unused-result"
+)
 target_include_directories(collada14dom PRIVATE
 	${colladadom_SOURCE_DIR}/include
 	${colladadom_SOURCE_DIR}/include/1.4
+	${Boost_INCLUDE_DIRS}
 	${LIBXML2_INCLUDE_DIRS}
 	${MINIZIP_INCLUDE_DIRS}
 	${ZLIB_INCLUDE_DIRS}
 )
 target_link_directories(collada14dom INTERFACE
+	${Boost_LIBRARY_DIRS}
 	${LIBXML2_LIBRARY_DIRS}
 	${MINIZIP_LIBRARY_DIRS}
 	${ZLIB_LIBRARY_DIRS}
