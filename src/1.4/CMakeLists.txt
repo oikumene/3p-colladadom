@@ -1,8 +1,14 @@
 file(GLOB dom_files ${CMAKE_CURRENT_SOURCE_DIR}/dom/*.cpp)
 add_library(collada14dom STATIC ${COLLADA_BASE_SOURCES} ${dom_files})
-target_compile_options(collada14dom PRIVATE
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  target_compile_options(collada14dom PRIVATE
+	"-Wno-error=unused-result" "-Wno-cast-user-defined" "-Wno-nonnull"
+  )
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  target_compile_options(collada14dom PRIVATE
 	"-Wno-error=unused-result"
-)
+  )
+endif()
 target_include_directories(collada14dom PRIVATE
 	${colladadom_SOURCE_DIR}/include
 	${colladadom_SOURCE_DIR}/include/1.4
@@ -23,4 +29,4 @@ set_target_properties(collada14dom PROPERTIES
   CLEAN_DIRECT_OUTPUT 1
   SOVERSION ${COLLADA_DOM_SOVERSION}
   VERSION ${COLLADA_DOM_VERSION})
-install(TARGETS collada14dom DESTINATION ${COLLADA_DOM_LIBS_INSTALL_DIR})
+# install(TARGETS collada14dom DESTINATION ${COLLADA_DOM_LIBS_INSTALL_DIR})
