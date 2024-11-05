@@ -107,8 +107,8 @@ daeMetaElement::addContentsOrder(daeInt offset)
 	meaa->setOffset(offset);
 	meaa->setContainer( this);
 
-    if (_metaContentsOrder)
-        delete _metaContentsOrder;
+	if (_metaContentsOrder)
+		delete _metaContentsOrder;
 
 	_metaContentsOrder = meaa;
 }
@@ -121,8 +121,8 @@ void daeMetaElement::addCMDataArray(daeInt offset, daeUInt numChoices)
 	meaa->setOffset(offset);
 	meaa->setContainer( this);
 
-    if (_metaCMData)
-        delete _metaCMData;
+	if (_metaCMData)
+		delete _metaCMData;
 
 	_metaCMData = meaa;
 
@@ -169,14 +169,16 @@ daeMetaElement::appendAttribute(daeMetaAttribute* attr)
 	if (attr == NULL)
 		return;
 
-	if (strcmp(attr->getName(),"_value") == 0) {
+	daeStringRef str_val("_value");
+	daeStringRef str_id("id");
+
+	if (attr->getName() == str_val) {
 		_metaValue = attr;
 	}
 	else
 		_metaAttributes.append(attr);
 
-	if ((attr->getName() != NULL) &&
-		(strcmp(attr->getName(),"id") == 0)) {
+	if (attr->getName() == str_id) {
 		_metaID = attr;
 		_isTrackableForQueries = true;
 	}

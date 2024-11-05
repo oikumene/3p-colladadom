@@ -2,7 +2,8 @@ file(GLOB dom_files ${CMAKE_CURRENT_SOURCE_DIR}/dom/*.cpp)
 add_library(collada14dom STATIC ${COLLADA_BASE_SOURCES} ${dom_files})
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_compile_options(collada14dom PRIVATE
-	"-Wno-error=unused-result" "-Wno-cast-user-defined" "-Wno-nonnull"
+	"-Wno-error=unused-result" "-Wno-error=overloaded-virtual="
+	"-Wno-cast-user-defined" "-Wno-nonnull" "-Wno-unused-function"
   )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(collada14dom PRIVATE

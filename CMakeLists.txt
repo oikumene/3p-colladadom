@@ -1,5 +1,5 @@
-project(colladadom)
 cmake_minimum_required(VERSION 3.17)
+project(colladadom)
 
 include(FindPkgConfig)
 
